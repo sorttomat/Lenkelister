@@ -1,10 +1,26 @@
 class Lenkeliste<T> implements Liste<T> {
     class Node {
-        Node next;
-        T data;
+        private Node next;
+        private T data;
+
         public Node(T d) {
             next = null;
             data = d;
+        }
+
+        public Node getNext() {
+            return next;
+        }
+        public T getData() {
+            return data;
+        }
+
+        public void setNext(Node ny) {
+            this.next = ny;
+        }
+
+        public void setData(T nyData) {
+            this.data = nyData;
         }
     }
 
@@ -22,13 +38,13 @@ class Lenkeliste<T> implements Liste<T> {
     public void print() {
         Node p = start;
         while(p != null) {
-            System.out.println(p.data);
-            p = p.next;
+            System.out.println(p.getData());
+            p = p.getNext();
         }
     }
 
     public boolean erTom() {
-        if(this.stoerrelse == 0) {
+        if(stoerrelse() == 0) {
             return true;
         }
         return false;
@@ -42,7 +58,7 @@ class Lenkeliste<T> implements Liste<T> {
 
     public void leggTilStart(T x) {
         Node ny = new Node(x);
-        ny.next = start;
+        ny.setNext(start); 
         start = ny;
         oekStoerrelse();
     }
@@ -50,10 +66,10 @@ class Lenkeliste<T> implements Liste<T> {
     public void leggTilSlutt(T x) {
         Node ny = new Node(x);
         Node p = start;
-        while(p.next != null) {
-            p = p.next;
+        while(p.getNext() != null) {
+            p = p.getNext();
         }
-        p.next = ny;
+        p.setNext(ny);
         oekStoerrelse();
     }
 
@@ -62,11 +78,11 @@ class Lenkeliste<T> implements Liste<T> {
         Node p = start;
 
         for(int i = 1; i < pos; i ++) {
-            p = p.next;
+            p = p.getNext();
         }
-        Node forskyv = p.next;
-        p.next = ny;
-        ny.next = forskyv;
+        Node forskyv = p.getNext();
+        p.setNext(ny);
+        ny.setNext(forskyv);
         oekStoerrelse();
     }
 
@@ -77,8 +93,6 @@ class Lenkeliste<T> implements Liste<T> {
 
     @Override
     public void leggTil(int pos, T x) {
-        Node ny = new Node(x);
-
         if(pos == 0) {
             leggTilStart(x);
         }
@@ -97,9 +111,7 @@ class Lenkeliste<T> implements Liste<T> {
 
     @Override
     public void leggTil(T x) {
-        Node ny = new Node(x);
-        Node p = start;
-        if(this.erTom()) {
+        if(erTom()) {
             leggTilHvisTom(x);
         }
         else {
@@ -110,65 +122,65 @@ class Lenkeliste<T> implements Liste<T> {
 
     @Override
     public void sett(int pos, T x) {
-        if(pos >= this.stoerrelse() || pos < 0) {
+        if(pos >= stoerrelse() || pos < 0) {
             throw new UgyldigListeIndeks(pos);
         }
         else {
             Node p = start;
             for (int i = 0; i < pos; i++) {
-                p = p.next;
+                p = p.getNext();
             }
-            p.data = x;    
+            p.setData(x);
         }
     }
 
     @Override
     public T hent(int pos) {
-        if(pos >= this.stoerrelse() || pos < 0) {
+        if(pos >= stoerrelse() || pos < 0) {
             throw new UgyldigListeIndeks(pos);
         }
         else {
             Node p = start;
             for (int i = 0; i < pos; i++) {
-                p = p.next;
+                p = p.getNext();
             }
-            return p.data;    
+            return p.getData();    
         }
     }
 
     @Override
     public T fjern(int pos) {
-        if(pos >= this.stoerrelse() || pos < 0) {
+        if(pos >= stoerrelse() || pos < 0) {
             throw new UgyldigListeIndeks(pos);
         }
         else {
             Node p = start;
-            this.minskStoerrelse();
+            minskStoerrelse();
             if(pos == 0) {
-                Node neste = p.next;
+                Node neste = p.getNext();
                 start = neste;
-                return p.data;
+                return p.getData();
             }
             for(int i = 1; i < pos; i++) {
-                p = p.next;
+                p = p.getNext();
             }
-            Node slett = p.next;
-            p.next = slett.next;
-            return slett.data;  
+            Node slett = p.getNext();
+            p.setNext(slett.getNext());
+            return slett.getData();  
         }
     }
 
     @Override
     public T fjern(){
-        if(this.stoerrelse() == 0) {
+        if(stoerrelse() == 0) {
             throw new UgyldigListeIndeks(-1);
         }
         else {
             Node p = start;
-            Node neste = p.next;
+            Node neste = p.getNext();
             start = neste;
-            this.minskStoerrelse();
-            return p.data;   
+            minskStoerrelse();
+            return p.getData();   
         }
     }
 

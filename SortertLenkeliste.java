@@ -2,10 +2,10 @@ class SortertLenkeliste<T extends Comparable<T>> extends Lenkeliste<T> {
     
     public Node finnSiste() {
         Node p = super.start;
-        while(p.next != null) {
-            p = p.next;
+        while(p.getNext() == null) {
+            p = p.getNext();
         }
-        return p.next;
+        return p.getNext();
     }
 
     @Override
@@ -14,20 +14,20 @@ class SortertLenkeliste<T extends Comparable<T>> extends Lenkeliste<T> {
         if(super.erTom()) {
             super.leggTilHvisTom(x);
         }
-        else if(super.start.data.compareTo(x) > 0) {
+        else if(super.start.getData().compareTo(x) > 0) {
             super.leggTilStart(x);
         }
         else {
             Node p = super.start;
             for(int i = 1; i < super.stoerrelse(); i ++) {
-                if(p.next.data.compareTo(x) >= 0) { 
-                    Node forskyv = p.next;
-                    p.next = ny;
-                    ny.next = forskyv;
+                if(p.getNext().getData().compareTo(x) >= 0) { 
+                    Node forskyv = p.getNext();
+                    p.setNext(ny);
+                    ny.setNext(forskyv);
                     super.oekStoerrelse();
                     return;
                 }
-                p = p.next;
+                p = p.getNext();
             }
             super.leggTilSlutt(x);
         }
