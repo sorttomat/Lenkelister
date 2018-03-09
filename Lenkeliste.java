@@ -1,9 +1,10 @@
 class Lenkeliste<T> implements Liste<T> {
     class Node {
+        //Nøstet klasse, gir meg tilgang til Node innad i Lenkeliste-klassen.
         private Node next;
         private T data;
 
-        public Node(T d) {
+        protected Node(T d) {
             next = null;
             data = d;
         }
@@ -36,38 +37,34 @@ class Lenkeliste<T> implements Liste<T> {
         stoerrelse--;
     }
 
-    // public void print() {
-    //     Node p = start;
-    //     while(p != null) {
-    //         System.out.println(p.getData());
-    //         p = p.getNext();
-    //     }
-    // }
-
     protected boolean erTom() {
-        if(stoerrelse() == 0) {
+        //Sjekker om listen er tom.
+        if (stoerrelse() == 0) {
             return true;
         }
         return false;
     }
 
     protected void leggTilHvisTom(T x) {
+        //Denne blir kalt paa dersom listen er tom. Da blir noden lagt til som foerste node.
         Node ny = new Node(x);
         start = ny;
         oekStoerrelse();
     }
 
     protected void leggTilStart(T x) {
+        //Denne blir kalt paa dersom noden skal legges til foerst.
         Node ny = new Node(x);
-        ny.setNext(start); 
+        ny.setNext(start);
         start = ny;
         oekStoerrelse();
     }
 
     protected void leggTilSlutt(T x) {
+        //Denne blir kalt paa dersom noden skal legges til sist.
         Node ny = new Node(x);
         Node p = start;
-        while(p.getNext() != null) {
+        while (p.getNext() != null) {
             p = p.getNext();
         }
         p.setNext(ny);
@@ -75,10 +72,11 @@ class Lenkeliste<T> implements Liste<T> {
     }
 
     protected void leggTilMidten(int pos, T x) {
+        //Denne blir kalt paa dersom noden skal legges til mellom to andre noder.
         Node ny = new Node(x);
         Node p = start;
 
-        for(int i = 1; i < pos; i ++) {
+        for (int i = 1; i < pos; i++) {
             p = p.getNext();
         }
         Node forskyv = p.getNext();
@@ -94,28 +92,30 @@ class Lenkeliste<T> implements Liste<T> {
 
     @Override
     public void leggTil(int pos, T x) {
-        if(pos == 0) {
+        //Sjekker hva posisjonen er, og kaller paa de riktige metodene.
+        //Situasjonen er forskjellig avhengig av om noden skal legges til i en tom liste, 
+        //i starten av en liste, i midten av en liste, eller i slutten av en liste.
+        if (pos == 0) {
             leggTilStart(x);
-        }
-        else if((erTom() && pos != 0) || (pos > stoerrelse()) || (pos < 0)) {
+        } else if ((erTom() && pos != 0) || (pos > stoerrelse()) || (pos < 0)) {
             throw new UgyldigListeIndeks(pos);
         }
 
-        else if(pos == stoerrelse()) {
+        else if (pos == stoerrelse()) {
             leggTilSlutt(x);
         }
 
         else {
             leggTilMidten(pos, x);
-        }   
+        }
     }
 
     @Override
     public void leggTil(T x) {
-        if(erTom()) {
+        //Legger til i slutten av listen.
+        if (erTom()) {
             leggTilHvisTom(x);
-        }
-        else {
+        } else {
             leggTilSlutt(x);
         }
 
@@ -123,10 +123,10 @@ class Lenkeliste<T> implements Liste<T> {
 
     @Override
     public void sett(int pos, T x) {
-        if(pos >= stoerrelse() || pos < 0) {
+        //Endrer dataen til noden paa posisjon pos.
+        if (pos >= stoerrelse() || pos < 0) {
             throw new UgyldigListeIndeks(pos);
-        }
-        else {
+        } else {
             Node p = start;
             for (int i = 0; i < pos; i++) {
                 p = p.getNext();
@@ -137,51 +137,51 @@ class Lenkeliste<T> implements Liste<T> {
 
     @Override
     public T hent(int pos) {
-        if(pos >= stoerrelse() || pos < 0) {
+        //Henter noden paa posisjon pos.
+        if (pos >= stoerrelse() || pos < 0) {
             throw new UgyldigListeIndeks(pos);
-        }
-        else {
+        } else {
             Node p = start;
             for (int i = 0; i < pos; i++) {
                 p = p.getNext();
             }
-            return p.getData();    
+            return p.getData();
         }
     }
 
     @Override
     public T fjern(int pos) {
-        if(pos >= stoerrelse() || pos < 0) {
+        //Fjerner noden paa posisjon pos, og returnerer denne.
+        if (pos >= stoerrelse() || pos < 0) {
             throw new UgyldigListeIndeks(pos);
-        }
-        else {
+        } else {
             Node p = start;
             minskStoerrelse();
-            if(pos == 0) {
+            if (pos == 0) {
                 Node neste = p.getNext();
                 start = neste;
                 return p.getData();
             }
-            for(int i = 1; i < pos; i++) {
+            for (int i = 1; i < pos; i++) {
                 p = p.getNext();
             }
             Node slett = p.getNext();
             p.setNext(slett.getNext());
-            return slett.getData();  
+            return slett.getData();
         }
     }
 
     @Override
-    public T fjern(){
-        if(stoerrelse() == 0) {
+    public T fjern() {
+        //Fjerner den foerste noden.
+        if (stoerrelse() == 0) {
             throw new UgyldigListeIndeks(-1);
-        }
-        else {
+        } else {
             Node p = start;
             Node neste = p.getNext();
             start = neste;
             minskStoerrelse();
-            return p.getData();   
+            return p.getData();
         }
     }
 

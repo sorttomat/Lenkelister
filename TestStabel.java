@@ -13,7 +13,7 @@ public class TestStabel {
         testUnntak();
         // Ekstra Stabel-spesifikke tester
         testStabelMetoder();
-        System.out.println("\n"+ antallTester + " tester ferdig");
+        System.out.println("\n" + antallTester + " tester ferdig");
         System.out.println(antallPasserte + " passerte, " + antallFeil + " feil");
     }
 
@@ -85,7 +85,8 @@ public class TestStabel {
         sjekk("Element 3", liste.fjern(3), "fjern(3)");
         sjekk("Element 4", liste.fjern(3), "fjern(3) for andre gang");
         liste.leggTil("NyttElement");
-        sjekk("NyttElement", liste.hent(3), "hent(3) skal hente nytt element lagt til etter at andre elementer har blitt fjernet");
+        sjekk("NyttElement", liste.hent(3),
+                "hent(3) skal hente nytt element lagt til etter at andre elementer har blitt fjernet");
         sjekk(4, liste.stoerrelse(), "stoerrelse() etter flere kall paa fjern() og leggTil()");
     }
 
@@ -96,35 +97,35 @@ public class TestStabel {
             liste.fjern(); // skal ikke fungere, men skal kaste et unntak
             // hit kommer vi ikke om det ble kastet et unntak
             sjekkFeilet("fjern() paa tom liste skulle kastet unntak");
-        } catch(UgyldigListeIndeks e) {
+        } catch (UgyldigListeIndeks e) {
             sjekkPasserte();
         }
 
         try {
             liste.fjern(0);
             sjekkFeilet("fjern(0) paa tom liste skulle kastet unntak");
-        } catch(UgyldigListeIndeks e) {
+        } catch (UgyldigListeIndeks e) {
             sjekkPasserte();
         }
 
         try {
             liste.hent(0);
             sjekkFeilet("hent(0) paa tom liste skulle kastet unntak");
-        } catch(UgyldigListeIndeks e) {
+        } catch (UgyldigListeIndeks e) {
             sjekkPasserte();
         }
 
         try {
             liste.sett(0, "asd");
             sjekkFeilet("sett(0, ...) paa tom liste skulle kastet unntak");
-        } catch(UgyldigListeIndeks e) {
+        } catch (UgyldigListeIndeks e) {
             sjekkPasserte();
         }
 
         try {
             liste.leggTil(1, "asd");
             sjekkFeilet("leggTil(1, ...) paa tom liste skulle kastet unntak - kun indeks 0 er gyldig i tom liste");
-        } catch(UgyldigListeIndeks e) {
+        } catch (UgyldigListeIndeks e) {
             sjekkPasserte();
         }
 
@@ -133,56 +134,56 @@ public class TestStabel {
         try {
             liste.fjern(2);
             sjekkFeilet("fjern(2) paa liste med 2 elementer skulle kastet unntak");
-        } catch(UgyldigListeIndeks e) {
+        } catch (UgyldigListeIndeks e) {
             sjekkPasserte();
         }
 
         try {
             liste.hent(2);
             sjekkFeilet("hent(2) paa liste med 2 elementer skulle kastet unntak");
-        } catch(UgyldigListeIndeks e) {
+        } catch (UgyldigListeIndeks e) {
             sjekkPasserte();
         }
 
         try {
             liste.sett(2, "2 er ugyldig indeks");
             sjekkFeilet("sett(2, ...) paa liste med 2 elementer skulle kastet unntak");
-        } catch(UgyldigListeIndeks e) {
+        } catch (UgyldigListeIndeks e) {
             sjekkPasserte();
         }
 
         try {
             liste.leggTil(3, "3 er ugyldig indeks");
             sjekkFeilet("leggTil(3, ...) paa liste med 2 elementer skulle kastet unntak");
-        } catch(UgyldigListeIndeks e) {
+        } catch (UgyldigListeIndeks e) {
             sjekkPasserte();
         }
 
         try {
             liste.fjern(-1);
             sjekkFeilet("fjern(-1) skal kaste unntaket UgyldigListeIndeks");
-        } catch(UgyldigListeIndeks e) {
+        } catch (UgyldigListeIndeks e) {
             sjekkPasserte();
         }
 
         try {
             liste.hent(-1);
             sjekkFeilet("hent(-1) skal kaste unntaket UgyldigListeIndeks");
-        } catch(UgyldigListeIndeks e) {
+        } catch (UgyldigListeIndeks e) {
             sjekkPasserte();
         }
 
         try {
             liste.sett(-1, "-1 er en ugyldig indeks!");
             sjekkFeilet("sett(-1, ...) skal kaste unntaket UgyldigListeIndeks");
-        } catch(UgyldigListeIndeks e) {
+        } catch (UgyldigListeIndeks e) {
             sjekkPasserte();
         }
 
         try {
             liste.leggTil(-1, "-1 er en ugyldig indeks!");
             sjekkFeilet("leggTil(-1, ...) skal kaste unntaket UgyldigListeIndeks");
-        } catch(UgyldigListeIndeks e) {
+        } catch (UgyldigListeIndeks e) {
             sjekkPasserte();
         }
     }
@@ -204,7 +205,7 @@ public class TestStabel {
         try {
             stabel.taAv();
             sjekkFeilet("taAv() paa tom stabel skal kaste et unntak");
-        } catch(UgyldigListeIndeks e) {
+        } catch (UgyldigListeIndeks e) {
             sjekkPasserte();
         }
     }

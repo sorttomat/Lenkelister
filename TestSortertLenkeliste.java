@@ -10,7 +10,7 @@ public class TestSortertLenkeliste {
         testLeggTilMedIntegers();
         testFjernMedIndeks();
         testUnntak();
-        System.out.println("\n"+ antallTester + " tester ferdig");
+        System.out.println("\n" + antallTester + " tester ferdig");
         System.out.println(antallPasserte + " passerte, " + antallFeil + " feil");
     }
 
@@ -70,13 +70,13 @@ public class TestSortertLenkeliste {
         liste.leggTil("elementBBB");
         liste.leggTil("elementD");
 
-        String rekkefolge = liste.hent(0) + " - " + liste.hent(1) + " - " + liste.hent(2) +
-                " - " + liste.hent(3) + " - " + liste.hent(4) + " - " + liste.hent(5);
+        String rekkefolge = liste.hent(0) + " - " + liste.hent(1) + " - " + liste.hent(2) + " - " + liste.hent(3)
+                + " - " + liste.hent(4) + " - " + liste.hent(5);
         String forventet = "elementAA - elementAA - elementBBB - elementC - elementD - elementSist";
 
         sjekk(forventet, rekkefolge, "sjekk at sortering blir riktig med strings");
-        sjekk("elementBBB", liste.fjern(2), "fjern(2) paa listen ["+rekkefolge+"]");
-        sjekk("elementC", liste.fjern(2), "fjern(2) andre gang paa listen ["+rekkefolge+"]");
+        sjekk("elementBBB", liste.fjern(2), "fjern(2) paa listen [" + rekkefolge + "]");
+        sjekk("elementC", liste.fjern(2), "fjern(2) andre gang paa listen [" + rekkefolge + "]");
         sjekk("elementSist", liste.fjern(), "fjern() der elementSist skal ligge sist");
         sjekk(3, liste.stoerrelse(), "stoerrelse() etter flere kall paa fjern() og leggTil()");
     }
@@ -88,35 +88,35 @@ public class TestSortertLenkeliste {
             liste.fjern(); // skal ikke fungere, men skal kaste et unntak
             // hit kommer vi ikke om det ble kastet et unntak
             sjekkFeilet("fjern() paa tom liste skulle kastet unntak");
-        } catch(UgyldigListeIndeks e) {
+        } catch (UgyldigListeIndeks e) {
             sjekkPasserte();
         }
 
         try {
             liste.fjern(0);
             sjekkFeilet("fjern(0) paa tom liste skulle kastet unntak");
-        } catch(UgyldigListeIndeks e) {
+        } catch (UgyldigListeIndeks e) {
             sjekkPasserte();
         }
 
         try {
             liste.hent(0);
             sjekkFeilet("hent(0) paa tom liste skulle kastet unntak");
-        } catch(UgyldigListeIndeks e) {
+        } catch (UgyldigListeIndeks e) {
             sjekkPasserte();
         }
 
         try {
             liste.sett(0, "forventet UnsupportedOperationException her");
             sjekkFeilet("sett(0, ...) skulle kastet UnsupportedOperationException");
-        } catch(UnsupportedOperationException e) {
+        } catch (UnsupportedOperationException e) {
             sjekkPasserte();
         }
 
         try {
             liste.leggTil(1, "forventet UnsupportedOperationException her");
             sjekkFeilet("leggTil(1, ...) skulle kastet UnsupportedOperationException");
-        } catch(UnsupportedOperationException e) {
+        } catch (UnsupportedOperationException e) {
             sjekkPasserte();
         }
 
@@ -125,56 +125,56 @@ public class TestSortertLenkeliste {
         try {
             liste.fjern(2);
             sjekkFeilet("fjern(2) paa liste med 2 elementer skulle kastet unntak");
-        } catch(UgyldigListeIndeks e) {
+        } catch (UgyldigListeIndeks e) {
             sjekkPasserte();
         }
 
         try {
             liste.hent(2);
             sjekkFeilet("hent(2) paa liste med 2 elementer skulle kastet unntak");
-        } catch(UgyldigListeIndeks e) {
+        } catch (UgyldigListeIndeks e) {
             sjekkPasserte();
         }
 
         try {
             liste.sett(2, "forventet UnsupportedOperationException her");
             sjekkFeilet("sett(2, ...) skulle kastet UnsupportedOperationException");
-        } catch(UnsupportedOperationException e) {
+        } catch (UnsupportedOperationException e) {
             sjekkPasserte();
         }
 
         try {
             liste.leggTil(3, "forventet UnsupportedOperationException her");
             sjekkFeilet("leggTil(3, ...) skulle kastet UnsupportedOperationException");
-        } catch(UnsupportedOperationException e) {
+        } catch (UnsupportedOperationException e) {
             sjekkPasserte();
         }
 
         try {
             liste.fjern(-1);
             sjekkFeilet("fjern(-1) skal kaste unntaket UgyldigListeIndeks");
-        } catch(UgyldigListeIndeks e) {
+        } catch (UgyldigListeIndeks e) {
             sjekkPasserte();
         }
 
         try {
             liste.hent(-1);
             sjekkFeilet("hent(-1) skal kaste unntaket UgyldigListeIndeks");
-        } catch(UgyldigListeIndeks e) {
+        } catch (UgyldigListeIndeks e) {
             sjekkPasserte();
         }
 
         try {
             liste.sett(-1, "forventet UnsupportedOperationException her");
             sjekkFeilet("sett(-1, ...) skulle kastet UnsupportedOperationException");
-        } catch(UnsupportedOperationException e) {
+        } catch (UnsupportedOperationException e) {
             sjekkPasserte();
         }
 
         try {
             liste.leggTil(-1, "forventet UnsupportedOperationException her");
             sjekkFeilet("leggTil(-1, ...) skulle kastet UnsupportedOperationException");
-        } catch(UnsupportedOperationException e) {
+        } catch (UnsupportedOperationException e) {
             sjekkPasserte();
         }
     }
