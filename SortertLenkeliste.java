@@ -1,12 +1,4 @@
 class SortertLenkeliste<T extends Comparable<T>> extends Lenkeliste<T> {
-    
-    public Node finnSiste() {
-        Node p = super.start;
-        while(p.getNext() == null) {
-            p = p.getNext();
-        }
-        return p.getNext();
-    }
 
     @Override
     public void leggTil(T x) {

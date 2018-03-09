@@ -8,18 +8,19 @@ class Lenkeliste<T> implements Liste<T> {
             data = d;
         }
 
-        public Node getNext() {
+        protected Node getNext() {
             return next;
         }
-        public T getData() {
+
+        protected T getData() {
             return data;
         }
 
-        public void setNext(Node ny) {
+        protected void setNext(Node ny) {
             this.next = ny;
         }
 
-        public void setData(T nyData) {
+        protected void setData(T nyData) {
             this.data = nyData;
         }
     }
@@ -27,11 +28,11 @@ class Lenkeliste<T> implements Liste<T> {
     protected Node start = null;
     protected int stoerrelse = 0;
 
-    public void oekStoerrelse() {
+    protected void oekStoerrelse() {
         stoerrelse++;
     }
 
-    public void minskStoerrelse() {
+    protected void minskStoerrelse() {
         stoerrelse--;
     }
 
@@ -43,27 +44,27 @@ class Lenkeliste<T> implements Liste<T> {
         }
     }
 
-    public boolean erTom() {
+    protected boolean erTom() {
         if(stoerrelse() == 0) {
             return true;
         }
         return false;
     }
 
-    public void leggTilHvisTom(T x) {
+    protected void leggTilHvisTom(T x) {
         Node ny = new Node(x);
         start = ny;
         oekStoerrelse();
     }
 
-    public void leggTilStart(T x) {
+    protected void leggTilStart(T x) {
         Node ny = new Node(x);
         ny.setNext(start); 
         start = ny;
         oekStoerrelse();
     }
 
-    public void leggTilSlutt(T x) {
+    protected void leggTilSlutt(T x) {
         Node ny = new Node(x);
         Node p = start;
         while(p.getNext() != null) {
@@ -73,7 +74,7 @@ class Lenkeliste<T> implements Liste<T> {
         oekStoerrelse();
     }
 
-    public void leggTilMidten(int pos, T x) {
+    protected void leggTilMidten(int pos, T x) {
         Node ny = new Node(x);
         Node p = start;
 
