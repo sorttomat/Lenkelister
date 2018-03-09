@@ -36,13 +36,13 @@ class Lenkeliste<T> implements Liste<T> {
         stoerrelse--;
     }
 
-    public void print() {
-        Node p = start;
-        while(p != null) {
-            System.out.println(p.getData());
-            p = p.getNext();
-        }
-    }
+    // public void print() {
+    //     Node p = start;
+    //     while(p != null) {
+    //         System.out.println(p.getData());
+    //         p = p.getNext();
+    //     }
+    // }
 
     protected boolean erTom() {
         if(stoerrelse() == 0) {
